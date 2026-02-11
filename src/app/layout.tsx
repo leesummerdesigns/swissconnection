@@ -9,9 +9,44 @@ import { Toaster } from "react-hot-toast";
 const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
 export const metadata: Metadata = {
-  title: "The Swiss Connection - Find Services in Switzerland",
+  title: {
+    default: "The Swiss Connection — Private Services from People Near You",
+    template: "%s | The Swiss Connection",
+  },
   description:
-    "Connect with skilled service providers in Switzerland. Find haircuts, sewing, house cleaning, and more from professionals in your area.",
+    "Find skilled individuals offering private services in Switzerland. Haircuts, cleaning, repairs, tutoring, and more — no businesses, just real people with real talent.",
+  keywords: [
+    "services Switzerland",
+    "private services",
+    "haircuts Switzerland",
+    "house cleaning",
+    "home repairs",
+    "tutoring",
+    "service marketplace",
+    "Swiss services",
+  ],
+  authors: [{ name: "The Swiss Connection" }],
+  metadataBase: new URL("https://swissconnection.vercel.app"),
+  openGraph: {
+    type: "website",
+    locale: "en_CH",
+    siteName: "The Swiss Connection",
+    title: "The Swiss Connection — Private Services from People Near You",
+    description:
+      "Find skilled individuals offering private services in Switzerland. No businesses — just real people with real talent.",
+    images: [{ url: "/hero_image2.jpg", width: 1200, height: 630, alt: "The Swiss Connection" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Swiss Connection — Private Services from People Near You",
+    description:
+      "Find skilled individuals offering private services in Switzerland.",
+    images: ["/hero_image2.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

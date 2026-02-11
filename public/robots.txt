@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /profile/edit
+Disallow: /provider/setup
+Disallow: /messages
+
+Sitemap: https://swissconnection.vercel.app/sitemap.xml

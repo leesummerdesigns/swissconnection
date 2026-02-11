@@ -1,5 +1,6 @@
 export const dynamic = "force-dynamic";
 
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -53,6 +54,40 @@ const languageNames: Record<string, string> = {
   en: "English",
   ru: "Russian",
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const provider = await getProvider(params.id);
+  if (!provider) return { title: "Provider Not Found" };
+
+  const services = provider.providerProfile?.services
+    ?.map((ps) => ps.service?.name || ps.customName)
+    .filter(Boolean)
+    .join(", ");
+
+  const location = [provider.city, provider.canton].filter(Boolean).join(", ");
+  const title = `${provider.name}${services ? ` — ${services}` : ""}`;
+  const description = provider.bio
+    ? provider.bio.slice(0, 160)
+    : `${provider.name} offers ${services || "private services"}${location ? ` in ${location}` : ""}, Switzerland.`;
+
+  const photos = parsePhotos(provider.providerProfile?.photos ?? null);
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      ...(photos.length > 0 && {
+        images: [{ url: photos[0], alt: provider.name }],
+      }),
+    },
+  };
+}
 
 export default async function ProviderDetailPage({
   params,
