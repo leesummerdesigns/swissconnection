@@ -4,13 +4,13 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { profileSchema } from "@/lib/validations";
 import {
-
-export const dynamic = "force-dynamic";
   parseLanguages,
   serializeLanguages,
   parsePhotos,
   parseAvailability,
 } from "@/lib/db-helpers";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(
   request: Request,
