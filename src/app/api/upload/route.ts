@@ -4,6 +4,8 @@ import { authOptions } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 import crypto from "crypto";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   try {
     const session = await getServerSession(authOptions);
