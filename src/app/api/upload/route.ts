@@ -6,6 +6,23 @@ import crypto from "crypto";
 
 export const dynamic = "force-dynamic";
 
+const BUCKET_NAME = "images";
+
+async function ensureBucketExists() {
+  const { data: buckets } = await supabase.storage.listBuckets();
+  const exists = buckets?.some((b) => b.name === BUCKET_NAME);
+  if (!exists) {
+    const { error } = await supabase.storage.createBucket(BUCKET_NAME, {
+      public: true,
+      fileSizeLimit: 5 * 1024 * 1024,
+    });
+    if (error && !error.message.includes("already exists")) {
+      console.error("Failed to create bucket:", error);
+      throw error;
+    }
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const session = await getServerSession(authOptions);
@@ -43,6 +60,9 @@ export async function POST(request: Request) {
       );
     }
 
+    // Ensure the storage bucket exists
+    await ensureBucketExists();
+
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
@@ -53,7 +73,7 @@ export async function POST(request: Request) {
 
     // Upload to Supabase Storage
     const { error: uploadError } = await supabase.storage
-      .from("images")
+      .from(BUCKET_NAME)
       .upload(filePath, buffer, {
         contentType: file.type,
         upsert: false,
@@ -62,14 +82,14 @@ export async function POST(request: Request) {
     if (uploadError) {
       console.error("Supabase upload error:", uploadError);
       return NextResponse.json(
-        { error: "Failed to upload file" },
+        { error: `Upload failed: ${uploadError.message}` },
         { status: 500 }
       );
     }
 
     // Get the public URL
     const { data: urlData } = supabase.storage
-      .from("images")
+      .from(BUCKET_NAME)
       .getPublicUrl(filePath);
 
     return NextResponse.json({ url: urlData.publicUrl }, { status: 201 });

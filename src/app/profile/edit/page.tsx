@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { Save, Briefcase, Eye, Plus, X } from "lucide-react";
+import { Save, Briefcase, Eye, Plus, X, Trash2 } from "lucide-react";
 import { AvatarUpload, PhotoUpload } from "@/components/PhotoUpload";
 import { AvailabilityGrid } from "@/components/AvailabilityGrid";
 
@@ -562,6 +562,46 @@ export default function ProfileEditPage() {
           </button>
         </div>
       </form>
+
+      {/* Delete Account */}
+      <div className="mt-16 pt-8 border-t border-red-200">
+        <h2 className="text-lg font-semibold text-red-600 mb-2">
+          Delete Account
+        </h2>
+        <p className="text-sm text-text-secondary mb-4">
+          Permanently delete your account and all associated data. This action
+          cannot be undone.
+        </p>
+        <button
+          type="button"
+          onClick={async () => {
+            if (
+              !window.confirm(
+                "Are you sure you want to delete your account? This cannot be undone."
+              )
+            )
+              return;
+            try {
+              const res = await fetch(`/api/users/${userId}`, {
+                method: "DELETE",
+              });
+              if (res.ok) {
+                toast.success("Account deleted");
+                await signOut({ callbackUrl: "/" });
+              } else {
+                const data = await res.json();
+                toast.error(data.error || "Failed to delete account");
+              }
+            } catch {
+              toast.error("Something went wrong");
+            }
+          }}
+          className="px-4 py-2 bg-red-600 text-white rounded-lg text-sm font-medium hover:bg-red-700 transition-colors flex items-center gap-2"
+        >
+          <Trash2 size={16} />
+          Delete My Account
+        </button>
+      </div>
     </div>
   );
 }

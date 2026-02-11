@@ -112,3 +112,42 @@ export async function PUT(
     );
   }
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session || (session.user as any)?.id !== params.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Delete related records that don't have onDelete: Cascade
+    await prisma.review.deleteMany({
+      where: { OR: [{ reviewerId: params.id }, { providerId: params.id }] },
+    });
+    await prisma.recommendation.deleteMany({
+      where: {
+        OR: [{ recommenderId: params.id }, { recommendedId: params.id }],
+      },
+    });
+    await prisma.message.deleteMany({
+      where: { senderId: params.id },
+    });
+
+    // Delete user (cascades to: accounts, sessions, providerProfile, threadParticipant)
+    await prisma.user.delete({
+      where: { id: params.id },
+    });
+
+    return NextResponse.json({ message: "Account deleted" });
+  } catch (error) {
+    console.error("Delete user error:", error);
+    return NextResponse.json(
+      { error: "Failed to delete account" },
+      { status: 500 }
+    );
+  }
+}
