@@ -2,10 +2,23 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_EMAIL = process.env.EMAIL_FROM || "The Swiss Connection <noreply@theswissconnection.ch>";
+// Use custom domain when verified, fall back to Resend's shared domain which works without DNS setup
+const FROM_EMAIL =
+  process.env.EMAIL_FROM || "The Swiss Connection <onboarding@resend.dev>";
+
+// Construct the base URL: prefer NEXTAUTH_URL (explicit), then VERCEL_URL (injected by Vercel), then localhost
+function getBaseUrl(): string {
+  if (process.env.NEXTAUTH_URL && !process.env.NEXTAUTH_URL.includes("localhost")) {
+    return process.env.NEXTAUTH_URL;
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  return process.env.NEXTAUTH_URL || "http://localhost:3000";
+}
 
 export async function sendVerificationEmail(email: string, token: string) {
-  const verifyUrl = `${process.env.NEXTAUTH_URL}/de/verify-email?token=${token}`;
+  const verifyUrl = `${getBaseUrl()}/de/verify-email?token=${token}`;
 
   const { error } = await resend.emails.send({
     from: FROM_EMAIL,
@@ -34,7 +47,7 @@ export async function sendVerificationEmail(email: string, token: string) {
 }
 
 export async function sendPasswordResetEmail(email: string, token: string) {
-  const resetUrl = `${process.env.NEXTAUTH_URL}/de/reset-password?token=${token}`;
+  const resetUrl = `${getBaseUrl()}/de/reset-password?token=${token}`;
 
   const { error } = await resend.emails.send({
     from: FROM_EMAIL,
