@@ -169,7 +169,11 @@
     "haveAccount": "Bereits ein Konto?",
     "signInLink": "Anmelden",
     "accountCreated": "Konto erstellt! Bitte überprüfe deine E-Mail zur Verifizierung.",
-    "welcomeBackToast": "Willkommen zurück!"
+    "welcomeBackToast": "Willkommen zurück!",
+    "emailNotVerified": "Deine E-Mail-Adresse ist noch nicht verifiziert.",
+    "resendVerification": "Bestätigungsmail erneut senden",
+    "resendingEmail": "Wird gesendet...",
+    "verificationResent": "Bestätigungsmail wurde gesendet. Bitte überprüfe deinen Posteingang."
   },
   "messages": {
     "title": "Nachrichten",

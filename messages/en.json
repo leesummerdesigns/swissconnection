@@ -169,7 +169,11 @@
     "haveAccount": "Already have an account?",
     "signInLink": "Sign in",
     "accountCreated": "Account created! Please check your email to verify.",
-    "welcomeBackToast": "Welcome back!"
+    "welcomeBackToast": "Welcome back!",
+    "emailNotVerified": "Your email address has not been verified yet.",
+    "resendVerification": "Resend verification email",
+    "resendingEmail": "Sending...",
+    "verificationResent": "Verification email sent. Please check your inbox."
   },
   "messages": {
     "title": "Messages",

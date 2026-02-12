@@ -169,7 +169,11 @@
     "haveAccount": "Hai già un account?",
     "signInLink": "Accedi",
     "accountCreated": "Account creato! Controlla la tua email per verificarlo.",
-    "welcomeBackToast": "Bentornato!"
+    "welcomeBackToast": "Bentornato!",
+    "emailNotVerified": "Il tuo indirizzo email non è ancora stato verificato.",
+    "resendVerification": "Reinvia email di verifica",
+    "resendingEmail": "Invio in corso...",
+    "verificationResent": "Email di verifica inviata. Controlla la tua casella di posta."
   },
   "messages": {
     "title": "Messaggi",

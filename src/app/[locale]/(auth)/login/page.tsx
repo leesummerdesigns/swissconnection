@@ -12,6 +12,8 @@ export default function LoginPage() {
   const t = useTranslations("auth");
   const tc = useTranslations("common");
   const [loading, setLoading] = useState(false);
+  const [showResend, setShowResend] = useState(false);
+  const [resending, setResending] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -20,6 +22,7 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setShowResend(false);
 
     try {
       const result = await signIn("credentials", {
@@ -29,6 +32,9 @@ export default function LoginPage() {
       });
 
       if (result?.error) {
+        if (result.error.includes("verify your email")) {
+          setShowResend(true);
+        }
         toast.error(result.error);
         return;
       }
@@ -40,6 +46,28 @@ export default function LoginPage() {
       toast.error(tc("somethingWentWrong"));
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleResend = async () => {
+    setResending(true);
+    try {
+      const res = await fetch("/api/auth/resend-verification", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: formData.email }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        toast.success(t("verificationResent"));
+        setShowResend(false);
+      } else {
+        toast.error(data.error || tc("somethingWentWrong"));
+      }
+    } catch {
+      toast.error(tc("somethingWentWrong"));
+    } finally {
+      setResending(false);
     }
   };
 
@@ -102,6 +130,19 @@ export default function LoginPage() {
             {loading ? t("signingIn") : t("signIn")}
           </button>
         </form>
+
+        {showResend && (
+          <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-center">
+            <p className="text-sm text-yellow-800 mb-2">{t("emailNotVerified")}</p>
+            <button
+              onClick={handleResend}
+              disabled={resending}
+              className="text-sm font-medium text-brand-500 hover:text-brand-600"
+            >
+              {resending ? t("resendingEmail") : t("resendVerification")}
+            </button>
+          </div>
+        )}
 
         <p className="mt-6 text-center text-sm text-text-secondary">
           {t("noAccount")}{" "}

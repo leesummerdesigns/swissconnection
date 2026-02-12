@@ -169,7 +169,11 @@
     "haveAccount": "Вже є акаунт?",
     "signInLink": "Увійти",
     "accountCreated": "Акаунт створено! Будь ласка, перевірте свій email для підтвердження.",
-    "welcomeBackToast": "З поверненням!"
+    "welcomeBackToast": "З поверненням!",
+    "emailNotVerified": "Ваша електронна адреса ще не підтверджена.",
+    "resendVerification": "Надіслати лист підтвердження повторно",
+    "resendingEmail": "Надсилання...",
+    "verificationResent": "Лист підтвердження надіслано. Перевірте вашу поштову скриньку."
   },
   "messages": {
     "title": "Повідомлення",
