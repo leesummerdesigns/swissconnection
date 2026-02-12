@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { Search, MapPin } from "lucide-react";
 
 interface SearchBarProps {
@@ -10,6 +11,7 @@ interface SearchBarProps {
 }
 
 export function SearchBar({ size = "compact", className = "" }: SearchBarProps) {
+  const t = useTranslations("search");
   const router = useRouter();
   const [service, setService] = useState("");
   const [location, setLocation] = useState("");
@@ -30,7 +32,7 @@ export function SearchBar({ size = "compact", className = "" }: SearchBarProps) 
             <Search size={20} className="text-text-tertiary flex-shrink-0" />
             <input
               type="text"
-              placeholder="What service are you looking for? (e.g., haircut, sewing, cleaning)"
+              placeholder={t("placeholder")}
               className="w-full outline-none text-text-primary placeholder:text-text-tertiary"
               value={service}
               onChange={(e) => setService(e.target.value)}
@@ -40,7 +42,7 @@ export function SearchBar({ size = "compact", className = "" }: SearchBarProps) 
             <MapPin size={20} className="text-text-tertiary flex-shrink-0" />
             <input
               type="text"
-              placeholder="Postal code, City or region"
+              placeholder={t("locationPlaceholder")}
               className="w-full outline-none text-text-primary placeholder:text-text-tertiary"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
@@ -51,7 +53,7 @@ export function SearchBar({ size = "compact", className = "" }: SearchBarProps) 
             className="bg-brand-500 text-white px-8 py-4 font-medium hover:bg-brand-600 transition-colors flex items-center justify-center gap-2"
           >
             <Search size={18} />
-            <span>Search</span>
+            <span>{t("searchButton")}</span>
           </button>
         </div>
       </form>
@@ -65,7 +67,7 @@ export function SearchBar({ size = "compact", className = "" }: SearchBarProps) 
           <Search size={16} className="text-text-tertiary" />
           <input
             type="text"
-            placeholder="Search services..."
+            placeholder={t("searchCompactPlaceholder")}
             className="w-full outline-none text-sm text-text-primary placeholder:text-text-tertiary"
             value={service}
             onChange={(e) => setService(e.target.value)}

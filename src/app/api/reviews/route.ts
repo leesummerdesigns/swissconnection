@@ -3,6 +3,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { reviewSchema } from "@/lib/validations";
+import { translateAndStore } from "@/lib/translate";
+import { getRequestLocale } from "@/lib/get-request-locale";
 
 export const dynamic = "force-dynamic";
 
@@ -65,6 +67,10 @@ export async function POST(request: Request) {
         reviewer: { select: { id: true, name: true, avatarUrl: true } },
       },
     });
+
+    // Fire-and-forget: translate review to all locales
+    const sourceLocale = getRequestLocale(request);
+    translateAndStore("review", review.id, validated.text, sourceLocale);
 
     return NextResponse.json(review, { status: 201 });
   } catch (error: any) {

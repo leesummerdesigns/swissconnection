@@ -1,7 +1,8 @@
 "use client";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -31,12 +32,13 @@ interface MapViewProps {
 }
 
 export default function MapView({ providers }: MapViewProps) {
+  const t = useTranslations("provider");
   const mappable = providers.filter((p) => p.latitude && p.longitude);
 
   if (mappable.length === 0) {
     return (
       <div className="h-[500px] rounded-card bg-surface-secondary flex items-center justify-center text-text-secondary">
-        No providers with location data to display on map.
+        {t("noMapProviders")}
       </div>
     );
   }
@@ -74,7 +76,7 @@ export default function MapView({ providers }: MapViewProps) {
                   href={`/providers/${provider.id}`}
                   className="text-brand-500 hover:underline text-xs mt-1 inline-block"
                 >
-                  View profile
+                  {t("viewProfile")}
                 </Link>
               </div>
             </Popup>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { useTranslations, useLocale } from "next-intl";
 import { Award, X } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -11,6 +12,8 @@ interface RecommendButtonProps {
 }
 
 export function RecommendButton({ userId, userName }: RecommendButtonProps) {
+  const t = useTranslations("recommend");
+  const locale = useLocale();
   const { data: session } = useSession();
   const [showForm, setShowForm] = useState(false);
   const [text, setText] = useState("");
@@ -27,20 +30,20 @@ export function RecommendButton({ userId, userName }: RecommendButtonProps) {
     try {
       const res = await fetch("/api/recommendations", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "X-Locale": locale },
         body: JSON.stringify({ recommendedId: userId, text }),
       });
 
       if (res.ok) {
-        toast.success(`Recommendation for ${userName} sent!`);
+        toast.success(t("sent", { name: userName }));
         setShowForm(false);
         setText("");
       } else {
         const data = await res.json();
-        toast.error(data.error || "Failed to send recommendation");
+        toast.error(data.error || t("failedToSend"));
       }
     } catch {
-      toast.error("Something went wrong");
+      toast.error(t("failedToSend"));
     } finally {
       setLoading(false);
     }
@@ -50,7 +53,7 @@ export function RecommendButton({ userId, userName }: RecommendButtonProps) {
     return (
       <div className="mt-4 p-4 bg-brand-50 rounded-card border border-brand-100">
         <div className="flex items-center justify-between mb-3">
-          <h4 className="font-medium text-sm">Recommend {userName}</h4>
+          <h4 className="font-medium text-sm">{t("recommendName", { name: userName })}</h4>
           <button
             type="button"
             onClick={() => setShowForm(false)}
@@ -62,7 +65,7 @@ export function RecommendButton({ userId, userName }: RecommendButtonProps) {
         <form onSubmit={handleSubmit}>
           <textarea
             className="input-field text-sm min-h-[80px] mb-3"
-            placeholder={`Why do you recommend ${userName}?`}
+            placeholder={t("whyRecommend", { name: userName })}
             maxLength={500}
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -72,7 +75,7 @@ export function RecommendButton({ userId, userName }: RecommendButtonProps) {
             disabled={loading || !text.trim()}
             className="btn-primary text-sm"
           >
-            {loading ? "Sending..." : "Send Recommendation"}
+            {loading ? t("sending") : t("sendRecommendation")}
           </button>
         </form>
       </div>
@@ -85,7 +88,7 @@ export function RecommendButton({ userId, userName }: RecommendButtonProps) {
       className="btn-secondary w-full text-center flex items-center justify-center gap-2 mt-3"
     >
       <Award size={18} />
-      Recommend
+      {t("recommend")}
     </button>
   );
 }

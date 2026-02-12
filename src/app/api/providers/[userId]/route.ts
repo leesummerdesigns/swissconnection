@@ -9,6 +9,7 @@ import {
   serializePhotos,
   serializeAvailability,
 } from "@/lib/db-helpers";
+import { translateAndStore } from "@/lib/translate";
 
 export const dynamic = "force-dynamic";
 
@@ -113,6 +114,27 @@ export async function PUT(
             })
         )
       );
+    }
+
+    // Fire-and-forget: auto-translate service descriptions
+    if (body.services) {
+      for (const s of body.services) {
+        if (s.description) {
+          const entityId = s.serviceId || s.customName || "";
+          translateAndStore(
+            "service_description",
+            `${params.userId}_${entityId}`,
+            s.description
+          ).catch(() => {});
+        }
+        if (s.customName) {
+          translateAndStore(
+            "service_custom_name",
+            `${params.userId}_${s.customName}`,
+            s.customName
+          ).catch(() => {});
+        }
+      }
     }
 
     return NextResponse.json(profile);

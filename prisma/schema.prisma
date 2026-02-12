@@ -168,3 +168,17 @@ model Recommendation {
   recommender User @relation("RecommendationsMade", fields: [recommenderId], references: [id])
   recommended User @relation("RecommendationsReceived", fields: [recommendedId], references: [id])
 }
+
+model Translation {
+  id               String   @id @default(cuid())
+  entityType       String
+  entityId         String
+  locale           String
+  text             String
+  isAutoTranslated Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@unique([entityType, entityId, locale])
+  @@index([entityType, entityId])
+}

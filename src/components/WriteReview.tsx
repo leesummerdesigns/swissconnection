@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { useTranslations, useLocale } from "next-intl";
 import { Star } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -11,6 +12,8 @@ interface Props {
 }
 
 export function WriteReview({ providerId, onReviewSubmitted }: Props) {
+  const t = useTranslations("reviews");
+  const locale = useLocale();
   const { status } = useSession();
   const [canReview, setCanReview] = useState(false);
   const [rating, setRating] = useState(0);
@@ -36,19 +39,19 @@ export function WriteReview({ providerId, onReviewSubmitted }: Props) {
     try {
       const res = await fetch("/api/reviews", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "X-Locale": locale },
         body: JSON.stringify({ providerId, rating, text: text.trim() }),
       });
       if (res.ok) {
-        toast.success("Review submitted!");
+        toast.success(t("submitted"));
         setSubmitted(true);
         onReviewSubmitted?.();
       } else {
         const data = await res.json();
-        toast.error(data.error || "Failed to submit review");
+        toast.error(data.error || t("failedToSubmit"));
       }
     } catch {
-      toast.error("Something went wrong");
+      toast.error(t("failedToSubmit"));
     } finally {
       setSubmitting(false);
     }
@@ -56,7 +59,7 @@ export function WriteReview({ providerId, onReviewSubmitted }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <h3 className="font-semibold">Write a review</h3>
+      <h3 className="font-semibold">{t("writeReview")}</h3>
       <div className="flex gap-1">
         {[1, 2, 3, 4, 5].map((star) => (
           <button
@@ -81,7 +84,7 @@ export function WriteReview({ providerId, onReviewSubmitted }: Props) {
       <textarea
         className="input-field text-sm"
         rows={3}
-        placeholder="Share your experience..."
+        placeholder={t("sharePlaceholder")}
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
@@ -90,7 +93,7 @@ export function WriteReview({ providerId, onReviewSubmitted }: Props) {
         disabled={submitting || rating === 0 || !text.trim()}
         className="btn-primary text-sm disabled:opacity-50"
       >
-        {submitting ? "Submitting..." : "Submit Review"}
+        {submitting ? t("submitting") : t("submitReview")}
       </button>
     </form>
   );

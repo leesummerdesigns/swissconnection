@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
+import { getTranslatedText } from "@/lib/translate";
+import { getRequestLocale } from "@/lib/get-request-locale";
 
 export const dynamic = "force-dynamic";
 
@@ -47,7 +49,21 @@ export async function GET(
       data: { readAt: new Date() },
     });
 
-    return NextResponse.json({ messages });
+    // Translate messages to the viewer's locale
+    const viewerLocale = getRequestLocale(request);
+    const messagesWithTranslations = await Promise.all(
+      messages.map(async (msg) => {
+        const translatedBody = await getTranslatedText("message", msg.id, viewerLocale);
+        return {
+          ...msg,
+          body: translatedBody || msg.body,
+          originalBody: msg.body,
+          isTranslated: !!translatedBody && translatedBody !== msg.body,
+        };
+      })
+    );
+
+    return NextResponse.json({ messages: messagesWithTranslations });
   } catch (error) {
     console.error("Get messages error:", error);
     return NextResponse.json({ messages: [] }, { status: 500 });

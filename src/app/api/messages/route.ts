@@ -3,6 +3,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { messageSchema } from "@/lib/validations";
+import { translateAndStore } from "@/lib/translate";
+import { getRequestLocale } from "@/lib/get-request-locale";
 
 export const dynamic = "force-dynamic";
 
@@ -92,6 +94,10 @@ export async function POST(request: Request) {
       where: { id: threadId },
       data: { lastMessageAt: new Date() },
     });
+
+    // Fire-and-forget: translate message to all locales
+    const sourceLocale = getRequestLocale(request);
+    translateAndStore("message", message.id, validated.body, sourceLocale);
 
     return NextResponse.json({ ...message, threadId }, { status: 201 });
   } catch (error: any) {

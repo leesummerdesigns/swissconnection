@@ -1,12 +1,15 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { useState, useEffect, useCallback } from "react";
 import { Menu, X, User, LogOut, MessageSquare, Search } from "lucide-react";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export function Navbar() {
+  const t = useTranslations("nav");
   const { data: session, status } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
@@ -65,13 +68,14 @@ export function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-6">
+            <LanguageSwitcher />
             {!isProvider && (
               <Link
                 href="/provider/setup"
                 className="flex items-center gap-1.5 text-text-secondary hover:text-text-primary transition-colors"
               >
                 <Search size={18} />
-                <span>Provide your Services</span>
+                <span>{t("provideServices")}</span>
               </Link>
             )}
 
@@ -82,7 +86,7 @@ export function Navbar() {
                   className="relative flex items-center gap-1.5 text-text-secondary hover:text-text-primary transition-colors"
                 >
                   <MessageSquare size={18} />
-                  <span>Messages</span>
+                  <span>{t("messages")}</span>
                   {unreadCount > 0 && (
                     <span className="absolute -top-1 -right-2 w-4 h-4 bg-red-500 rounded-full text-white text-[10px] font-bold flex items-center justify-center">
                       {unreadCount > 9 ? "9+" : unreadCount}
@@ -109,7 +113,7 @@ export function Navbar() {
                         onClick={() => setProfileMenuOpen(false)}
                       >
                         <User size={16} />
-                        Profile
+                        {t("profile")}
                       </Link>
                       <Link
                         href="/messages"
@@ -117,7 +121,7 @@ export function Navbar() {
                         onClick={() => setProfileMenuOpen(false)}
                       >
                         <MessageSquare size={16} />
-                        Messages
+                        {t("messages")}
                         {unreadCount > 0 && (
                           <span className="ml-auto w-5 h-5 bg-red-500 rounded-full text-white text-[10px] font-bold flex items-center justify-center">
                             {unreadCount > 9 ? "9+" : unreadCount}
@@ -133,7 +137,7 @@ export function Navbar() {
                         className="flex items-center gap-2 w-full px-4 py-2.5 text-sm text-text-primary hover:bg-surface-secondary"
                       >
                         <LogOut size={16} />
-                        Sign Out
+                        {t("signOut")}
                       </button>
                     </div>
                   )}
@@ -142,10 +146,10 @@ export function Navbar() {
             ) : (
               <div className="flex items-center gap-3">
                 <Link href="/login" className="btn-text text-sm">
-                  Sign In
+                  {t("signIn")}
                 </Link>
                 <Link href="/register" className="btn-primary text-sm">
-                  Sign Up
+                  {t("signUp")}
                 </Link>
               </div>
             )}
@@ -169,7 +173,7 @@ export function Navbar() {
                 className="block py-2.5 text-text-secondary hover:text-text-primary"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Provide your Services
+                {t("provideServices")}
               </Link>
             )}
             {status === "authenticated" ? (
@@ -179,7 +183,7 @@ export function Navbar() {
                   className="flex items-center gap-2 py-2.5 text-text-secondary hover:text-text-primary"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Messages
+                  {t("messages")}
                   {unreadCount > 0 && (
                     <span className="w-5 h-5 bg-red-500 rounded-full text-white text-[10px] font-bold flex items-center justify-center">
                       {unreadCount > 9 ? "9+" : unreadCount}
@@ -191,7 +195,7 @@ export function Navbar() {
                   className="block py-2.5 text-text-secondary hover:text-text-primary"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Profile
+                  {t("profile")}
                 </Link>
                 <button
                   onClick={() => {
@@ -200,7 +204,7 @@ export function Navbar() {
                   }}
                   className="block w-full text-left py-2.5 text-text-secondary hover:text-text-primary"
                 >
-                  Sign Out
+                  {t("signOut")}
                 </button>
               </>
             ) : (
@@ -210,17 +214,20 @@ export function Navbar() {
                   className="block py-2.5 text-text-secondary hover:text-text-primary"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Sign In
+                  {t("signIn")}
                 </Link>
                 <Link
                   href="/register"
                   className="block py-2.5 text-brand-500 font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  Sign Up
+                  {t("signUp")}
                 </Link>
               </>
             )}
+            <div className="py-2.5">
+              <LanguageSwitcher />
+            </div>
           </div>
         )}
       </div>

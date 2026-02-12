@@ -12,10 +12,16 @@ interface Review {
   };
 }
 
-export function ReviewList({ reviews }: { reviews: Review[] }) {
+interface ReviewListProps {
+  reviews: Review[];
+  locale?: string;
+  noReviewsText?: string;
+}
+
+export function ReviewList({ reviews, locale = "de", noReviewsText }: ReviewListProps) {
   if (reviews.length === 0) {
     return (
-      <p className="text-text-secondary text-sm">No reviews yet.</p>
+      <p className="text-text-secondary text-sm">{noReviewsText || "No reviews yet."}</p>
     );
   }
 
@@ -30,7 +36,7 @@ export function ReviewList({ reviews }: { reviews: Review[] }) {
             <div>
               <p className="font-medium text-sm">{review.reviewer.name}</p>
               <p className="text-xs text-text-tertiary">
-                {new Date(review.createdAt).toLocaleDateString("de-CH", {
+                {new Date(review.createdAt).toLocaleDateString(locale, {
                   month: "long",
                   year: "numeric",
                 })}

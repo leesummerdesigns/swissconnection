@@ -9,6 +9,7 @@ import {
   parsePhotos,
   parseAvailability,
 } from "@/lib/db-helpers";
+import { translateAndStore } from "@/lib/translate";
 
 export const dynamic = "force-dynamic";
 
@@ -96,6 +97,11 @@ export async function PUT(
         avatarUrl: validated.avatarUrl,
       },
     });
+
+    // Fire-and-forget: auto-translate bio to all locales
+    if (validated.bio) {
+      translateAndStore("user_bio", params.id, validated.bio).catch(() => {});
+    }
 
     return NextResponse.json(user);
   } catch (error: any) {
