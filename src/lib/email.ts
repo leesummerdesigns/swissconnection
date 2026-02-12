@@ -2,9 +2,8 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Use custom domain when verified, fall back to Resend's shared domain which works without DNS setup
 const FROM_EMAIL =
-  process.env.EMAIL_FROM || "The Swiss Connection <onboarding@resend.dev>";
+  process.env.EMAIL_FROM || "The Swiss Connection <noreply@swissconnection.online>";
 
 // Construct the base URL: prefer NEXTAUTH_URL (explicit), then VERCEL_URL (injected by Vercel), then localhost
 function getBaseUrl(): string {
