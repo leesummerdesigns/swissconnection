@@ -5,9 +5,9 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM_EMAIL = process.env.EMAIL_FROM || "The Swiss Connection <noreply@theswissconnection.ch>";
 
 export async function sendVerificationEmail(email: string, token: string) {
-  const verifyUrl = `${process.env.NEXTAUTH_URL}/verify-email?token=${token}`;
+  const verifyUrl = `${process.env.NEXTAUTH_URL}/de/verify-email?token=${token}`;
 
-  await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: FROM_EMAIL,
     to: email,
     subject: "Verify your email — The Swiss Connection",
@@ -27,12 +27,16 @@ export async function sendVerificationEmail(email: string, token: string) {
       </div>
     `,
   });
+
+  if (error) {
+    throw new Error(`Resend error: ${error.message}`);
+  }
 }
 
 export async function sendPasswordResetEmail(email: string, token: string) {
-  const resetUrl = `${process.env.NEXTAUTH_URL}/reset-password?token=${token}`;
+  const resetUrl = `${process.env.NEXTAUTH_URL}/de/reset-password?token=${token}`;
 
-  await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: FROM_EMAIL,
     to: email,
     subject: "Reset your password — The Swiss Connection",
@@ -52,4 +56,8 @@ export async function sendPasswordResetEmail(email: string, token: string) {
       </div>
     `,
   });
+
+  if (error) {
+    throw new Error(`Resend error: ${error.message}`);
+  }
 }

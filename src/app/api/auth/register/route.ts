@@ -38,6 +38,14 @@ export async function POST(request: Request) {
       await sendVerificationEmail(user.email, verifyToken);
     } catch (emailError) {
       console.error("Failed to send verification email:", emailError);
+      return NextResponse.json(
+        {
+          error:
+            "Account created but we could not send the verification email. Please contact support.",
+          userId: user.id,
+        },
+        { status: 503 }
+      );
     }
 
     return NextResponse.json(
