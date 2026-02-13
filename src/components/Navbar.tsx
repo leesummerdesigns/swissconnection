@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { useState, useEffect, useCallback } from "react";
-import { Menu, X, User, LogOut, MessageSquare, Search } from "lucide-react";
+import { Menu, User, LogOut, MessageSquare, Search } from "lucide-react";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export function Navbar() {
@@ -61,7 +61,7 @@ export function Navbar() {
               alt="The Swiss Connection"
               width={140}
               height={25}
-              className="h-[25px] w-auto"
+              className="h-[18px] md:h-[25px] w-auto"
               priority
             />
           </Link>
@@ -155,13 +155,23 @@ export function Navbar() {
             )}
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile icons */}
+          <div className="md:hidden flex items-center gap-1">
+            <LanguageSwitcher />
+            <button
+              className="p-2 text-text-secondary hover:text-text-primary"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Account menu"
+            >
+              {status === "authenticated" && session?.user ? (
+                <div className="w-7 h-7 rounded-full bg-brand-500 flex items-center justify-center text-white text-xs font-medium">
+                  {session.user.name?.[0]?.toUpperCase() || "U"}
+                </div>
+              ) : (
+                <User size={22} />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
