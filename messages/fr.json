@@ -200,7 +200,9 @@
     "selectConversation": "Sélectionnez une conversation ou trouvez un prestataire à contacter",
     "loading": "Chargement des messages...",
     "failedToSend": "Échec de l'envoi du message",
-    "autoTranslated": "Traduit automatiquement"
+    "autoTranslated": "Traduit automatiquement",
+    "translate": "Traduire",
+    "showOriginal": "Voir l'original"
   },
   "verifyEmail": {
     "verifying": "Vérification de votre e-mail...",

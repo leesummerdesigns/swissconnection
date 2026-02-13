@@ -200,7 +200,9 @@
     "selectConversation": "Seleziona una conversazione o trova un fornitore a cui scrivere",
     "loading": "Caricamento messaggi...",
     "failedToSend": "Invio del messaggio non riuscito",
-    "autoTranslated": "Tradotto automaticamente"
+    "autoTranslated": "Tradotto automaticamente",
+    "translate": "Traduci",
+    "showOriginal": "Mostra originale"
   },
   "verifyEmail": {
     "verifying": "Verifica della tua email in corso...",

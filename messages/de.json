@@ -200,7 +200,9 @@
     "selectConversation": "Wähle ein Gespräch oder finde einen Anbieter zum Nachricht senden",
     "loading": "Nachrichten werden geladen...",
     "failedToSend": "Nachricht konnte nicht gesendet werden",
-    "autoTranslated": "Automatisch übersetzt"
+    "autoTranslated": "Automatisch übersetzt",
+    "translate": "Übersetzen",
+    "showOriginal": "Original anzeigen"
   },
   "verifyEmail": {
     "verifying": "Deine E-Mail wird verifiziert...",

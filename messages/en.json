@@ -200,7 +200,9 @@
     "selectConversation": "Select a conversation or find a provider to message",
     "loading": "Loading messages...",
     "failedToSend": "Failed to send message",
-    "autoTranslated": "Auto-translated"
+    "autoTranslated": "Auto-translated",
+    "translate": "Translate",
+    "showOriginal": "Show original"
   },
   "verifyEmail": {
     "verifying": "Verifying your email...",

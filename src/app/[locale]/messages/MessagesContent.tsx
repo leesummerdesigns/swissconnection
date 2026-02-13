@@ -50,6 +50,9 @@ export default function MessagesContent() {
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
+  const [showTranslation, setShowTranslation] = useState<Record<string, boolean>>({});
+  const [translating, setTranslating] = useState<Record<string, boolean>>({});
+  const [onDemandTranslations, setOnDemandTranslations] = useState<Record<string, string>>({});
 
   const currentUserId = (session?.user as any)?.id;
 
@@ -69,6 +72,34 @@ export default function MessagesContent() {
       return () => clearInterval(interval);
     }
   }, [activeThread]);
+
+  useEffect(() => {
+    setShowTranslation({});
+    setTranslating({});
+    setOnDemandTranslations({});
+  }, [activeThread]);
+
+  async function translateMessage(msg: Message) {
+    if (msg.isTranslated) {
+      setShowTranslation((prev) => ({ ...prev, [msg.id]: true }));
+      return;
+    }
+    setTranslating((prev) => ({ ...prev, [msg.id]: true }));
+    try {
+      const res = await fetch(`/api/messages/${msg.id}/translate`, {
+        headers: { "X-Locale": locale },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setOnDemandTranslations((prev) => ({ ...prev, [msg.id]: data.translatedText }));
+        setShowTranslation((prev) => ({ ...prev, [msg.id]: true }));
+      }
+    } catch {
+      // silently fail
+    } finally {
+      setTranslating((prev) => ({ ...prev, [msg.id]: false }));
+    }
+  }
 
   async function fetchThreads() {
     try {
@@ -212,49 +243,58 @@ export default function MessagesContent() {
                     {t("startConversation")}
                   </div>
                 )}
-                {messages.map((msg) => (
-                  <div
-                    key={msg.id}
-                    className={`flex ${
-                      msg.senderId === currentUserId
-                        ? "justify-end"
-                        : "justify-start"
-                    }`}
-                  >
+                {messages.map((msg) => {
+                  const isFromOther = msg.senderId !== currentUserId;
+                  const isShowingTranslation = !!showTranslation[msg.id];
+                  const displayBody = isShowingTranslation
+                    ? (onDemandTranslations[msg.id] || msg.body)
+                    : (msg.originalBody || msg.body);
+                  return (
                     <div
-                      className={`max-w-[70%] px-4 py-2.5 rounded-2xl ${
-                        msg.senderId === currentUserId
-                          ? "bg-brand-500 text-white rounded-br-sm"
-                          : "bg-surface-secondary text-text-primary rounded-bl-sm"
+                      key={msg.id}
+                      className={`flex flex-col ${
+                        isFromOther ? "items-start" : "items-end"
                       }`}
                     >
-                      <p className="text-sm">{msg.body}</p>
-                      {msg.isTranslated && (
-                        <p
-                          className={`text-[10px] italic mt-0.5 ${
-                            msg.senderId === currentUserId
-                              ? "text-white/50"
-                              : "text-text-tertiary"
-                          }`}
-                        >
-                          {t("autoTranslated")}
-                        </p>
-                      )}
-                      <p
-                        className={`text-xs mt-1 ${
-                          msg.senderId === currentUserId
-                            ? "text-white/70"
-                            : "text-text-tertiary"
+                      <div
+                        className={`max-w-[70%] px-4 py-2.5 rounded-2xl ${
+                          isFromOther
+                            ? "bg-surface-secondary text-text-primary rounded-bl-sm"
+                            : "bg-brand-500 text-white rounded-br-sm"
                         }`}
                       >
-                        {new Date(msg.createdAt).toLocaleTimeString(locale, {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        })}
-                      </p>
+                        <p className="text-sm">{displayBody}</p>
+                        <p
+                          className={`text-xs mt-1 ${
+                            isFromOther ? "text-text-tertiary" : "text-white/70"
+                          }`}
+                        >
+                          {new Date(msg.createdAt).toLocaleTimeString(locale, {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })}
+                        </p>
+                      </div>
+                      {isFromOther && (
+                        <button
+                          onClick={() =>
+                            isShowingTranslation
+                              ? setShowTranslation((prev) => ({ ...prev, [msg.id]: false }))
+                              : translateMessage(msg)
+                          }
+                          disabled={translating[msg.id]}
+                          className="text-[10px] mt-0.5 px-1 text-text-tertiary hover:text-brand-500 transition-colors disabled:opacity-50"
+                        >
+                          {translating[msg.id]
+                            ? "..."
+                            : isShowingTranslation
+                            ? t("showOriginal")
+                            : t("translate")}
+                        </button>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               {/* Message Input */}
