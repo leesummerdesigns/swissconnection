@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { locales } from "@/i18n/config";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://swissconnection.vercel.app";
+  const baseUrl = "https://swissconnection.online";
 
   const staticPaths = [
     { path: "", changeFrequency: "daily" as const, priority: 1 },

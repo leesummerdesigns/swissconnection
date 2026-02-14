@@ -8,6 +8,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Providers } from "@/components/Providers";
 import { Toaster } from "react-hot-toast";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
@@ -37,7 +38,7 @@ export async function generateMetadata({
     },
     description: t("description"),
     authors: [{ name: "The Swiss Connection" }],
-    metadataBase: new URL("https://swissconnection.vercel.app"),
+    metadataBase: new URL("https://swissconnection.online"),
     openGraph: {
       type: "website",
       locale: localeMap[locale] || "de_CH",
@@ -95,6 +96,9 @@ export default async function LocaleLayout({
             <Toaster position="bottom-right" />
           </Providers>
         </NextIntlClientProvider>
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
       </body>
     </html>
   );
