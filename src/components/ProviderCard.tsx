@@ -29,7 +29,7 @@ export function ProviderCard({
   reviewCount = 0,
   photos = [],
 }: ProviderCardProps) {
-  const coverImage = photos[0] || avatarUrl;
+  const coverImage = avatarUrl || photos[0];
 
   return (
     <Link href={`/providers/${id}`} className="block">
