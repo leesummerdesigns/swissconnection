@@ -141,8 +141,26 @@ export default function ProfileEditPage() {
     }));
   };
 
-  const handleAvatarUpload = (url: string) => {
+  const handleAvatarUpload = async (url: string) => {
     setProfile((prev) => ({ ...prev, avatarUrl: url }));
+    // Auto-save avatar immediately so it persists without needing form submit
+    try {
+      await fetch(`/api/users/${userId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: profile.name,
+          bio: profile.bio,
+          postalCode: profile.postalCode,
+          city: profile.city,
+          canton: profile.canton,
+          languages: profile.languages,
+          avatarUrl: url,
+        }),
+      });
+    } catch {
+      // Will be saved with form submit as fallback
+    }
   };
 
   const addPredefinedService = (serviceId: string) => {
