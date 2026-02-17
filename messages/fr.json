@@ -304,5 +304,32 @@
     "hourly": "/h",
     "failed": "Échec",
     "unauthorized": "Non autorisé"
+  },
+  "about": {
+    "title": "À propos",
+    "p1": "SwissConnection.online a été fondé par Louis Henrich avec une vision claire : connecter les gens en Suisse — au-delà des frontières linguistiques, culturelles et régionales. Que vous cherchiez un service ou que vous souhaitiez offrir votre talent — cette plateforme vous réunit.",
+    "p2": "Notre site est entièrement gratuit. SwissConnection.online est une initiative à but non lucratif, portée par la conviction que l'accès à un réseau solide ne devrait pas être une question d'argent. Tous les revenus générés par des fonctionnalités optionnelles ou des partenariats sont directement investis dans le fonctionnement et le développement de la plateforme.",
+    "p3": "Nous croyons que les réseaux solides naissent de vraies connexions — entre voisins, professionnels et personnes serviables. SwissConnection.online est l'endroit où la confiance compte et où la collaboration grandit.",
+    "p4": "Notre objectif est de construire à long terme une communauté active qui montre : la meilleure aide vient souvent d'à côté."
+  },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "principleTitle": "Principe",
+    "principleText": "La protection des données personnelles est une priorité absolue pour SwissConnection.online. En tant qu'initiative à but non lucratif, SwissConnection.online ne poursuit aucun objectif commercial. Il n'y a aucune intention de réaliser des bénéfices. Le traitement des données personnelles s'effectue exclusivement dans le cadre des dispositions légales et se limite à ce qui est nécessaire au fonctionnement de la plateforme.",
+    "noSharingTitle": "Aucune transmission à des tiers",
+    "noSharingText1": "Les données personnelles ne sont ni vendues, ni louées, ni transmises de quelque manière que ce soit à des tiers. Une transmission à des tiers n'a lieu que si une obligation légale l'exige ou si une ordonnance officielle ou judiciaire le requiert.",
+    "noSharingText2": "Il n'y a aucune utilisation commerciale des données collectées.",
+    "publicProfilesTitle": "Profils accessibles au public",
+    "publicProfilesText1": "Les profils d'utilisateurs créés sur SwissConnection.online sont accessibles au public. Toutes les informations que les utilisateurs publient volontairement dans leur profil peuvent être consultées par d'autres visiteurs du site.",
+    "publicProfilesText2": "Les utilisateurs sont seuls responsables du contenu et des informations qu'ils publient dans leurs profils. Il est expressément recommandé de ne pas publier de données personnelles sensibles dans les zones visibles publiquement.",
+    "emailProtectionTitle": "Protection des adresses e-mail et des coordonnées",
+    "emailProtectionText": "Les adresses e-mail ainsi que les autres coordonnées directes ne sont pas affichées publiquement. Ces données ne sont pas visibles par les autres utilisateurs et sont traitées de manière confidentielle.",
+    "dataSecurityTitle": "Sécurité des données",
+    "dataSecurityText": "SwissConnection.online prend des mesures de sécurité techniques et organisationnelles appropriées pour protéger les données personnelles contre tout accès non autorisé, perte, abus ou manipulation. Malgré des précautions de sécurité rigoureuses, une protection absolue contre les accès de tiers ne peut cependant être garantie.",
+    "userResponsibilityTitle": "Responsabilité des utilisateurs",
+    "userResponsibilityText": "L'utilisation de la plateforme se fait sous la propre responsabilité de l'utilisateur. Les utilisateurs sont tenus de garder leurs identifiants d'accès confidentiels et de prendre des mesures de sécurité appropriées pour empêcher tout accès non autorisé à leur compte.",
+    "changesTitle": "Modifications",
+    "changesText": "SwissConnection.online se réserve le droit de modifier cette politique de confidentialité à tout moment. La version actuellement publiée sur le site fait foi.",
+    "consent": "En utilisant SwissConnection.online, les utilisateurs acceptent cette politique de confidentialité."
   }
 }

@@ -304,5 +304,32 @@
     "hourly": "/Std.",
     "failed": "Fehlgeschlagen",
     "unauthorized": "Nicht autorisiert"
+  },
+  "about": {
+    "title": "Über uns",
+    "p1": "SwissConnection.online wurde von Louis Henrich mit einer klaren Vision gegründet: Menschen in der Schweiz miteinander zu verbinden — über sprachliche, kulturelle und regionale Grenzen hinweg. Ob du eine Dienstleistung suchst oder dein Talent anbieten möchtest — diese Plattform bringt euch zusammen.",
+    "p2": "Unsere Website ist vollständig kostenlos nutzbar. SwissConnection.online ist eine Non-Profit-Initiative, getragen von der Überzeugung, dass der Zugang zu einem starken Netzwerk keine Frage des Geldes sein sollte. Alle Einnahmen, die durch optionale Funktionen oder Partnerschaften entstehen, fliessen direkt in den Betrieb und die Weiterentwicklung der Plattform.",
+    "p3": "Wir glauben daran, dass starke Netzwerke aus echten Verbindungen entstehen — zwischen Nachbarn, Fachleuten und hilfsbereiten Menschen. SwissConnection.online ist der Ort, wo Vertrauen zählt und Zusammenarbeit wächst.",
+    "p4": "Unser Ziel ist es, langfristig eine aktive Community aufzubauen, die zeigt: Die beste Hilfe kommt oft von nebenan."
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "principleTitle": "Grundsatz",
+    "principleText": "Der Schutz personenbezogener Daten hat für SwissConnection.online höchste Priorität. Als Non-Profit-Initiative verfolgt SwissConnection.online keinerlei kommerzielle Zwecke. Eine Gewinnerzielungsabsicht besteht nicht. Die Verarbeitung personenbezogener Daten erfolgt ausschliesslich im Rahmen der gesetzlichen Bestimmungen und beschränkt sich auf das für den Betrieb der Plattform notwendige Mass.",
+    "noSharingTitle": "Keine Weitergabe an Dritte",
+    "noSharingText1": "Personenbezogene Daten werden weder verkauft noch vermietet oder in sonstiger Weise an Dritte weitergegeben. Eine Übermittlung an Dritte erfolgt ausschliesslich, sofern eine gesetzliche Verpflichtung besteht oder eine behördliche bzw. gerichtliche Anordnung dies erfordert.",
+    "noSharingText2": "Es findet keine kommerzielle Nutzung der erhobenen Daten statt.",
+    "publicProfilesTitle": "Öffentlich zugängliche Profile",
+    "publicProfilesText1": "Die auf SwissConnection.online erstellten Nutzerprofile sind öffentlich zugänglich. Sämtliche Informationen, die Nutzer freiwillig in ihrem Profil veröffentlichen, können von anderen Besuchern der Website eingesehen werden.",
+    "publicProfilesText2": "Die Nutzer sind selbst verantwortlich für die Inhalte und Angaben, die sie in ihren Profilen veröffentlichen. Es wird ausdrücklich empfohlen, keine sensiblen personenbezogenen Daten in öffentlich sichtbaren Bereichen zu publizieren.",
+    "emailProtectionTitle": "Schutz von E-Mail-Adressen und Kontaktdaten",
+    "emailProtectionText": "E-Mail-Adressen sowie sonstige direkte Kontaktdaten werden nicht öffentlich angezeigt. Diese Daten sind für andere Nutzer nicht sichtbar und werden vertraulich behandelt.",
+    "dataSecurityTitle": "Datensicherheit",
+    "dataSecurityText": "SwissConnection.online trifft angemessene technische und organisatorische Sicherheitsmassnahmen, um personenbezogene Daten vor unbefugtem Zugriff, Verlust, Missbrauch oder Manipulation zu schützen. Trotz sorgfältiger Sicherheitsvorkehrungen kann jedoch kein absoluter Schutz vor Zugriffen durch Dritte garantiert werden.",
+    "userResponsibilityTitle": "Eigenverantwortung der Nutzer",
+    "userResponsibilityText": "Die Nutzung der Plattform erfolgt in eigener Verantwortung. Nutzer sind verpflichtet, ihre Zugangsdaten vertraulich zu behandeln und angemessene Sicherheitsvorkehrungen zu treffen, um einen unbefugten Zugriff auf ihr Benutzerkonto zu verhindern.",
+    "changesTitle": "Änderungen",
+    "changesText": "SwissConnection.online behält sich das Recht vor, diese Datenschutzerklärung jederzeit anzupassen. Es gilt die jeweils auf der Website veröffentlichte Fassung.",
+    "consent": "Durch die Nutzung von SwissConnection.online erklären sich die Nutzer mit dieser Datenschutzerklärung einverstanden."
   }
 }

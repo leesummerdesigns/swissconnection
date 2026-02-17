@@ -304,5 +304,32 @@
     "hourly": "/ora",
     "failed": "Non riuscito",
     "unauthorized": "Non autorizzato"
+  },
+  "about": {
+    "title": "Chi siamo",
+    "p1": "SwissConnection.online è stato fondato da Louis Henrich con una visione chiara: connettere le persone in Svizzera — oltre i confini linguistici, culturali e regionali. Che tu stia cercando un servizio o voglia offrire il tuo talento — questa piattaforma vi mette in contatto.",
+    "p2": "Il nostro sito è completamente gratuito. SwissConnection.online è un'iniziativa senza scopo di lucro, guidata dalla convinzione che l'accesso a una rete solida non dovrebbe essere una questione di soldi. Tutti i ricavi generati da funzionalità opzionali o partnership vengono investiti direttamente nel funzionamento e nello sviluppo della piattaforma.",
+    "p3": "Crediamo che le reti solide nascano da connessioni reali — tra vicini, professionisti e persone disponibili. SwissConnection.online è il luogo dove la fiducia conta e la collaborazione cresce.",
+    "p4": "Il nostro obiettivo è costruire a lungo termine una comunità attiva che dimostri: il miglior aiuto spesso viene dalla porta accanto."
+  },
+  "privacy": {
+    "title": "Informativa sulla privacy",
+    "principleTitle": "Principio",
+    "principleText": "La protezione dei dati personali è una priorità assoluta per SwissConnection.online. In quanto iniziativa senza scopo di lucro, SwissConnection.online non persegue alcuno scopo commerciale. Non vi è alcuna intenzione di generare profitti. Il trattamento dei dati personali avviene esclusivamente nel quadro delle disposizioni di legge e si limita a quanto necessario per il funzionamento della piattaforma.",
+    "noSharingTitle": "Nessuna trasmissione a terzi",
+    "noSharingText1": "I dati personali non vengono venduti, affittati né trasmessi in alcun modo a terzi. La trasmissione a terzi avviene esclusivamente in presenza di un obbligo legale o di un'ordinanza ufficiale o giudiziaria.",
+    "noSharingText2": "Non viene effettuato alcun utilizzo commerciale dei dati raccolti.",
+    "publicProfilesTitle": "Profili accessibili al pubblico",
+    "publicProfilesText1": "I profili utente creati su SwissConnection.online sono accessibili al pubblico. Tutte le informazioni che gli utenti pubblicano volontariamente nel loro profilo possono essere visualizzate da altri visitatori del sito.",
+    "publicProfilesText2": "Gli utenti sono esclusivamente responsabili dei contenuti e delle informazioni che pubblicano nei loro profili. Si raccomanda espressamente di non pubblicare dati personali sensibili nelle aree pubblicamente visibili.",
+    "emailProtectionTitle": "Protezione degli indirizzi e-mail e dei dati di contatto",
+    "emailProtectionText": "Gli indirizzi e-mail e gli altri dati di contatto diretti non vengono visualizzati pubblicamente. Questi dati non sono visibili agli altri utenti e vengono trattati in modo confidenziale.",
+    "dataSecurityTitle": "Sicurezza dei dati",
+    "dataSecurityText": "SwissConnection.online adotta misure di sicurezza tecniche e organizzative adeguate per proteggere i dati personali da accessi non autorizzati, perdita, abuso o manipolazione. Nonostante le attente precauzioni di sicurezza, non è possibile garantire una protezione assoluta contro l'accesso di terzi.",
+    "userResponsibilityTitle": "Responsabilità degli utenti",
+    "userResponsibilityText": "L'utilizzo della piattaforma avviene sotto la propria responsabilità. Gli utenti sono tenuti a mantenere riservate le proprie credenziali di accesso e ad adottare misure di sicurezza adeguate per impedire l'accesso non autorizzato al proprio account.",
+    "changesTitle": "Modifiche",
+    "changesText": "SwissConnection.online si riserva il diritto di modificare la presente informativa sulla privacy in qualsiasi momento. Fa fede la versione attualmente pubblicata sul sito.",
+    "consent": "Utilizzando SwissConnection.online, gli utenti accettano la presente informativa sulla privacy."
   }
 }
